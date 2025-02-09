@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: simple_auth_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: simple_auth_api
+    depends_on:
+      - db
+    env_file:
+      - .env # .env ファイルを読み込む
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: ["air"]
+
+volumes:
+  db-data:
