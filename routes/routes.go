@@ -12,6 +12,7 @@ const (
 	loginRoute    = "/login"
 	refreshRoute  = "/refresh"
 	logoutRoute   = "/logout"
+	meRoute       = "/me"
 )
 
 func SetupRouter() *gin.Engine {
@@ -24,6 +25,7 @@ func SetupRouter() *gin.Engine {
 	r.POST(loginRoute, handlers.Login)
 	r.POST(refreshRoute, handlers.RefreshToken)
 	r.POST(logoutRoute, handlers.Logout)
+	r.GET(meRoute, handlers.GetMe)
 
 	return r
 }
