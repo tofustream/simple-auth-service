@@ -46,6 +46,18 @@ curl -X POST http://localhost:8000/login \
     -c cookies.txt
 ```
 
+### Logout
+
+```
+curl -X POST http://localhost:8000/logout -b cookies.txt
+```
+
+### Refresh
+
+```
+curl -X POST http://localhost:8000/refresh -b cookies.txt
+```
+
 ### Get User Info
 
 ```
