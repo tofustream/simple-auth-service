@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/tofustream/simple-auth-service/config"
@@ -16,5 +17,13 @@ func main() {
 	config.ConnectDB()
 
 	r := routes.SetupRouter()
-	r.Run(":8000")
+
+	// 環境変数 PORT の値を取得
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8000" // デフォルトポートを設定
+	}
+
+	// サーバーを指定したポートで起動
+	r.Run(":" + port)
 }
